@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#c084fc">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>💜 Feliz Día de las Madres</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- CANVAS BACKGROUND -->
+  <canvas id="heart-canvas"></canvas>
+
+  <!-- PARTICLES CONTAINER -->
+  <div class="particles-container" id="particles-container"></div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 0: LOGIN
+  ═══════════════════════════════════ -->
+  <div class="screen active" id="screen-login">
+    <div class="login-bg-photos">
+      <div class="login-photo lp1"><img src="./assets1/photo1.JPG" alt="foto" onerror="this.parentElement.style.background='linear-gradient(135deg,#e9d5ff,#fbcfe8)'"></div>
+      <div class="login-photo lp2"><img src="./assets1/photo2.JPG" alt="foto" onerror="this.parentElement.style.background='linear-gradient(135deg,#fbcfe8,#ddd6fe)'"></div>
+    </div>
+
+    <div class="login-card">
+      <div class="login-avatar-wrap">
+        <div class="login-avatar-ring"></div>
+        <div class="login-avatar">
+          <img src="./assets1/avatar.JPG" alt="Mamá" id="avatar-img" onerror="this.style.display='none';document.getElementById('avatar-emoji').style.display='flex'">
+          <div id="avatar-emoji" class="avatar-emoji-fallback">👩</div>
+        </div>
+        <div class="avatar-hearts">
+          <span>💜</span><span>🌸</span><span>💜</span>
+        </div>
+      </div>
+
+      <h1 class="login-title">Hola, <span class="script-text">Mamá</span> 💜</h1>
+      <p class="login-sub">Ingresa tu nombre para abrir tu sorpresa</p>
+
+      <div class="login-hint">
+        <span class="hint-icon">💡</span>
+        <span>Pista: Nombre de la mejor mamá del mundo</span>
+      </div>
+
+      <div class="login-input-wrap">
+        <input type="text" id="login-input" class="login-input" placeholder="Tu nombre..." autocomplete="off" autocorrect="off" spellcheck="false">
+        <button class="login-btn" id="login-btn" onclick="handleLogin()">
+          <span>Abrir</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+      <div class="login-error" id="login-error">¡Ese no es tu nombre, mamá! 😄 Inténtalo de nuevo.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 1: LOADING
+  ═══════════════════════════════════ -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-inner">
+      <div class="loading-heart-wrap">
+        <div class="loading-heart">💜</div>
+        <div class="loading-rings">
+          <div class="lring r1"></div>
+          <div class="lring r2"></div>
+          <div class="lring r3"></div>
+        </div>
+      </div>
+      <p class="loading-text">Preparando algo muy especial...</p>
+      <div class="loading-dots"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 2: REGALO
+  ═══════════════════════════════════ -->
+  <div class="screen" id="screen-gift">
+    <!-- corner deco photos floating freely -->
+    <div class="corner-photo cp-tl" style="top:4%;left:2%;transform:rotate(-9deg)">
+      <img src="./assets1/photo4.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#e9d5ff,#fbcfe8)'">
+      <div class="cp-tape"></div>
+    </div>
+    <div class="corner-photo cp-tr" style="top:5%;right:2%;transform:rotate(7deg)">
+      <img src="./assets1/photo5.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#fbcfe8,#c4b5fd)'">
+      <div class="cp-tape"></div>
+    </div>
+
+    <div class="gift-scene">
+      <p class="screen-label script-text">Para ti, mamá</p>
+      <div class="gift-container" id="gift-container">
+        <div class="gift-box" id="gift-box">
+          <div class="gift-lid" id="gift-lid">
+            <div class="gift-lid-ribbon"></div>
+            <div class="gift-lid-bow">
+              <div class="bow-left"></div>
+              <div class="bow-right"></div>
+              <div class="bow-knot"></div>
+            </div>
+          </div>
+          <div class="gift-envelope-pop" id="gift-envelope-pop">
+            <div class="gep-back"></div>
+            <div class="gep-front">
+              <div class="gep-flap"></div>
+              <div class="gep-heart">💌</div>
+            </div>
+          </div>
+          <div class="gift-body">
+            <div class="gift-body-ribbon"></div>
+            <div class="gift-body-shine"></div>
+          </div>
+        </div>
+        <div class="gift-sparkles" id="gift-sparkles"></div>
+      </div>
+      <p class="tap-hint pulse-text">✦ toca para abrir ✦</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 3: SOBRE
+  ═══════════════════════════════════ -->
+  <div class="screen" id="screen-envelope">
+    <div class="envelope-wrapper" id="envelope-wrapper">
+      <div class="envelope" id="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-front">
+          <div class="envelope-stamp"><span>💜</span></div>
+          <div class="envelope-label">
+            <div class="env-to">Para: <span class="script-text" id="env-name">Mamá</span></div>
+            <div class="env-divider"></div>
+            <div class="env-from">De: Tus hijos que te adoran</div>
+          </div>
+        </div>
+      </div>
+      <p class="tap-hint pulse-text" style="margin-top:24px">✦ toca el sobre ✦</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 4: CARTA
+  ═══════════════════════════════════ -->
+  <div class="screen" id="screen-letter">
+    <div class="letter-scroll">
+      <div class="letter-container">
+
+        <!-- Photo inset top-left corner, half-outside card -->
+        <div class="letter-photo-tl">
+          <img src="./assets1/photo1.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#e9d5ff,#fbcfe8)'">
+          <div class="lp-tape"></div>
+        </div>
+        <!-- Photo inset left side, mid-height -->
+        <div class="letter-photo-ml">
+          <img src="./assets1/photo2.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#fbcfe8,#ddd6fe)'">
+          <div class="lp-tape lp-tape-side"></div>
+        </div>
+        <!-- Photo inset bottom-right corner -->
+        <div class="letter-photo-br">
+          <img src="./assets1/photo3.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ddd6fe,#fce7f3)'">
+          <div class="lp-tape"></div>
+        </div>
+
+        <div class="letter-header">
+          <div class="letter-flowers-top">🌸 💜 🌸</div>
+          <h2 class="script-text" style="font-size:clamp(28px,8vw,42px)">¡Eres la mejor mamá del mundo!</h2>
+          <p class="letter-subtitle">Gracias por tu amor infinito</p>
+        </div>
+
+        <div class="letter-body">
+          <p id="letter-name-greeting">Querida <span class="name-highlight" id="letter-name"></span>,</p>
+          <p>En este día tan especial, queremos recordarte lo increíble que eres. Tu amor incondicional ha sido nuestro mayor tesoro y nuestra guía en cada paso del camino.</p>
+          <p>Cada sonrisa tuya ilumina nuestro mundo. Cada abrazo tuyo nos da la paz que necesitamos. Eres nuestro refugio, nuestra inspiración y nuestra mayor bendición.</p>
+          <p>Gracias por cada sacrificio, por cada noche en vela, por cada palabra de aliento. Gracias por ser nuestro ejemplo de fortaleza, amor y perseverancia.</p>
+          <p>No hay palabras suficientes para describir todo lo que significas para nosotros. Solo sabemos que <strong>te queremos con todo nuestro corazón</strong>, hoy y siempre.</p>
+          <p class="letter-closing">¡Feliz Día de las Madres! 💜🌸💜</p>
+        </div>
+
+        <div class="letter-cta">
+          <p class="tap-hint">✦ toca una flor para continuar ✦</p>
+          <div class="flower-btns">
+            <button class="flower-btn" onclick="goToGame()">🌹</button>
+            <button class="flower-btn" onclick="goToGame()">🌷</button>
+            <button class="flower-btn" onclick="goToGame()">🌸</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 5: JUEGO — MAHJONG SOLITAIRE
+  ═══════════════════════════════════ -->
+  <div class="screen" id="screen-game">
+    <!-- corner deco photos -->
+    <div class="corner-photo cp-bl" style="bottom:5%;left:2%;transform:rotate(8deg)">
+      <img src="./assets1/photo6.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#e9d5ff,#fbcfe8)'">
+      <div class="cp-tape"></div>
+    </div>
+    <div class="corner-photo cp-tr-sm" style="top:4%;right:2%;transform:rotate(-6deg)">
+      <img src="./assets1/photo7.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#fbcfe8,#ddd6fe)'">
+      <div class="cp-tape"></div>
+    </div>
+
+    <div class="mahjong-wrapper">
+      <div class="mahjong-header">
+        <h2 class="script-text mahjong-title">¡Mahjong de Amor! 💜</h2>
+        <p class="mahjong-sub">Encuentra pares iguales. Una ficha solo sale si no tiene otra encima y al menos un lado libre.</p>
+        <div class="mahjong-stats">
+          <div class="mj-stat">
+            <span class="mj-stat-val" id="mj-pairs">0</span>
+            <span class="mj-stat-lbl">pares</span>
+          </div>
+          <div class="mj-stat-sep">·</div>
+          <div class="mj-stat">
+            <span class="mj-stat-val" id="mj-moves">0</span>
+            <span class="mj-stat-lbl">intentos</span>
+          </div>
+          <div class="mj-stat-sep">·</div>
+          <div class="mj-stat">
+            <span class="mj-stat-val" id="mj-remaining">16</span>
+            <span class="mj-stat-lbl">restantes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mahjong-board-container">
+        <div class="mahjong-board" id="mahjong-board"></div>
+      </div>
+
+      <div class="mahjong-win" id="mahjong-win" style="display:none">
+        <div class="win-emoji">🎉</div>
+        <p class="script-text win-text">¡Lo lograste, mamá!</p>
+        <p class="win-sub">Así como encontraste cada par, nosotros siempre te encontraremos a ti 💜</p>
+        <button class="cta-btn" onclick="goToFinal()">Ver nuestra dedicatoria →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 6: FINAL
+  ═══════════════════════════════════ -->
+  <div class="screen" id="screen-final">
+    <div class="final-scroll">
+      <div class="final-header">
+        <div class="final-crown">👑</div>
+        <h1 class="script-text final-title">La mejor mamá del universo</h1>
+        <p class="final-name script-text" id="final-name-display"></p>
+      </div>
+
+      <div class="final-photos-grid">
+        <div class="fp-item fp1"><img src="./assets1/photo1.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#e9d5ff,#fbcfe8)'"><div class="fp-tape"></div></div>
+        <div class="fp-item fp2"><img src="./assets1/photo2.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#fbcfe8,#ddd6fe)'"><div class="fp-tape"></div></div>
+        <div class="fp-item fp3"><img src="./assets1/photo3.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ddd6fe,#fce7f3)'"><div class="fp-tape"></div></div>
+        <div class="fp-item fp4"><img src="./assets1/photo4.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#e9d5ff,#f5d0fe)'"><div class="fp-tape"></div></div>
+        <div class="fp-item fp5"><img src="./assets1/photo5.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#fbcfe8,#e9d5ff)'"><div class="fp-tape"></div></div>
+        <div class="fp-item fp6"><img src="./assets1/photo6.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#ddd6fe,#fbcfe8)'"><div class="fp-tape"></div></div>
+        <div class="fp-item fp7"><img src="./assets1/photo7.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#f5d0fe,#fbcfe8)'"><div class="fp-tape"></div></div>
+        <div class="fp-item fp8"><img src="./assets1/photo8.JPG" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#e9d5ff,#fbcfe8)'"><div class="fp-tape"></div></div>
+      </div>
+
+      <div class="final-poem">
+        <p class="script-text" style="font-size:clamp(20px,5.5vw,32px);line-height:1.6;color:var(--p-deep)">
+          "Te queremos más que todas las estrellas,<br>
+          más que todos los corazones del cielo,<br>
+          más que cualquier palabra lo puede decir…<br>
+          ¡Te queremos infinito, mamá!"
+        </p>
+        <p class="final-sign">— Tus hijos 💜</p>
+      </div>
+
+      <div class="final-confetti-btn">
+        <button class="cta-btn pulse-btn" onclick="launchConfetti()">🎉 ¡Celebrar!</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
